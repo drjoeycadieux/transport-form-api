@@ -4,7 +4,7 @@ import { addReservation } from "../lib/reservation"; // Adjust path if needed
 import styles from "../app/page.module.css";
 import { firebase } from "firebase/app"; // Ensure Firebase is properly initialized in your project
 
-const TaxiReservationForm = () => {
+const TransportForm = () => {
     const [formData, setFormData] = useState({
         name: "",
         phoneNumber: "",
@@ -148,4 +148,4 @@ const TaxiReservationForm = () => {
     );
 };
 
-export default TaxiReservationForm;
+export default TransportForm;
