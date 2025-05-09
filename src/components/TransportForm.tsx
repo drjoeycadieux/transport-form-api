@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { addReservation } from "../lib/reservation"; // Adjust path if needed
 import styles from "../app/page.module.css";
+import { firebase } from "firebase/app"; // Ensure Firebase is properly initialized in your project
 
 const TaxiReservationForm = () => {
     const [formData, setFormData] = useState({
@@ -25,7 +26,11 @@ const TaxiReservationForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const reservationId = await addReservation(formData); // No createdAt here
+            const reservationId = await addReservation({
+                createdAt: firebase.firestore.Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
+                ...formData,
+            });
+
             alert(`Reservation Submitted Successfully! Reservation ID: ${reservationId}`);
 
             // Reset form
