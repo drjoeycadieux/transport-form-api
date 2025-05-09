@@ -1,7 +1,8 @@
 import { db } from './firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
-// Define the Reservation type
+
+
 interface Reservation {
     name: string;
     phoneNumber: string;
@@ -10,10 +11,10 @@ interface Reservation {
     pickupDate: string;
     numPassengers: number;
     additionalNotes: string;
-    createdAt: Timestamp; // Firebase timestamp
+    createdAt: Timestamp;
 }
 
-// Function to add reservation to Firestore
+
 export const addReservation = async (reservation: Reservation) => {
     try {
         const reservationRef = await addDoc(collection(db, 'reservations'), {
