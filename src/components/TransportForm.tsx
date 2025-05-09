@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import { addReservation } from "../lib/reservation"; // Import the addReservation function
+import { addReservation } from "../lib/reservation"; // Adjust path if needed
 import styles from "../app/page.module.css";
 
 const TaxiReservationForm = () => {
@@ -18,21 +18,17 @@ const TaxiReservationForm = () => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: name === "numPassengers" ? Number(value) : value,
         });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            // Call addReservation function from reservation.ts
-            const reservationId = await addReservation({
-                ...formData,
-                createdAt: new Date().toISOString(), // Ensure createdAt is passed as a string
-            });
+            const reservationId = await addReservation(formData); // No createdAt here
             alert(`Reservation Submitted Successfully! Reservation ID: ${reservationId}`);
 
-            // Reset form data after submission
+            // Reset form
             setFormData({
                 name: "",
                 phoneNumber: "",
@@ -135,11 +131,11 @@ const TaxiReservationForm = () => {
                 <textarea
                     id="additionalNotes"
                     name="additionalNotes"
-                    placeholder="Any special requests or notes (optional if you have one 'Files Number')"
+                    placeholder="Any special requests or notes"
                     value={formData.additionalNotes}
                     onChange={handleChange}
                     className={styles.textarea}
-                ></textarea>
+                />
             </div>
 
             <button type="submit" className={styles.button}>Submit Reservation</button>

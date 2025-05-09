@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
     return (
         <footer style={footerStyles}>
             <div style={footerContentStyles}>
-                <h4 style={titleStyles}>My Website</h4>
+                <h4 style={titleStyles}>Transport Reservation Form (API)</h4>
                 <div style={linksContainerStyles}>
                     <Link href="/about" style={linkStyles}>
                         About
@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                         Contact
                     </Link>
                 </div>
-                <p style={emailStyles}>Email: contact@mywebsite.com</p>
+                <p style={emailStyles}>Email: joeycadieux161@gmail.com</p>
             </div>
         </footer>
     );
