@@ -4,7 +4,6 @@ import React from 'react';
 
 import TransportForm from '../components/TransportForm';
 import FooterModule from '../components/FooterModule';
-import GenerateAI from '../components/GenerateAI'; // ✅ Import added
 
 import './HomePage.css';
 
@@ -23,10 +22,6 @@ const HomePage = () => {
 
       <section className="form-section">
         <TransportForm />
-      </section>
-
-      <section className="ai-section">
-        <GenerateAI />
       </section>
 
       <FooterModule />
