@@ -1,4 +1,4 @@
-import { db } from './firebase'; // import db from firebase.ts
+import { db } from './firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 // Define the Reservation type
@@ -18,7 +18,7 @@ export const addReservation = async (reservation: Reservation) => {
     try {
         const reservationRef = await addDoc(collection(db, 'reservations'), {
             ...reservation,
-            createdAt: Timestamp.now(), // Set the timestamp when the reservation is created
+            createdAt: Timestamp.fromDate(new Date())
         });
         return reservationRef.id; // Return the document ID after successful addition
     } catch (error) {
