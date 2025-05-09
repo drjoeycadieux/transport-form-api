@@ -1,25 +1,27 @@
 'use client';
-import { useState } from "react";
-import { addReservation } from "../lib/reservation"; // Adjust path if needed
-import styles from "../app/page.module.css";
-import { firebase } from "firebase/app"; // Ensure Firebase is properly initialized in your project
+import { useState } from 'react';
+import { addReservation } from '../lib/reservation'; // Adjust path if needed
+import styles from '../app/page.module.css';
 
 const TransportForm = () => {
     const [formData, setFormData] = useState({
-        name: "",
-        phoneNumber: "",
-        pickupLocation: "",
-        dropoffLocation: "",
-        pickupDate: "",
+        name: '',
+        phoneNumber: '',
+        pickupLocation: '',
+        dropoffLocation: '',
+        pickupDate: '',
         numPassengers: 1,
-        additionalNotes: "",
+        additionalNotes: '',
+
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: name === "numPassengers" ? Number(value) : value,
+            [name]: name === 'numPassengers' ? Number(value) : value,
         });
     };
 
@@ -27,25 +29,27 @@ const TransportForm = () => {
         e.preventDefault();
         try {
             const reservationId = await addReservation({
-                createdAt: firebase.firestore.Timestamp.fromDate(new Date()), // Converts to Firestore Timestamp
                 ...formData,
+                createdAt: new Date().toISOString(), // Send ISO timestamp
             });
 
-            alert(`Reservation Submitted Successfully! Reservation ID: ${reservationId}`);
+            alert(
+                `Reservation Submitted Successfully! Reservation ID: ${reservationId}`
+            );
 
             // Reset form
             setFormData({
-                name: "",
-                phoneNumber: "",
-                pickupLocation: "",
-                dropoffLocation: "",
-                pickupDate: "",
+                name: '',
+                phoneNumber: '',
+                pickupLocation: '',
+                dropoffLocation: '',
+                pickupDate: '',
                 numPassengers: 1,
-                additionalNotes: "",
+                additionalNotes: '',
             });
         } catch (error) {
-            console.error("Error submitting reservation: ", error);
-            alert("Failed to submit reservation.");
+            console.error('Error submitting reservation:', error);
+            alert('Failed to submit reservation.');
         }
     };
 
@@ -143,7 +147,9 @@ const TransportForm = () => {
                 />
             </div>
 
-            <button type="submit" className={styles.button}>Submit Reservation</button>
+            <button type="submit" className={styles.button}>
+                Submit Reservation
+            </button>
         </form>
     );
 };
