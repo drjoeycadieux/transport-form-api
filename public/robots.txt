@@ -1,0 +1,6 @@
+# robots.txt
+
+User-agent: *
+Disallow:
+
+# Allow all web crawlers to access all content
