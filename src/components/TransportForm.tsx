@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { addReservation } from '../lib/reservation'; // Adjust path if needed
+import { Timestamp } from 'firebase/firestore'; // Import Timestamp from Firebase Firestore
 import styles from '../app/page.module.css';
 
 const TransportForm = () => {
@@ -30,7 +31,7 @@ const TransportForm = () => {
         try {
             const reservationId = await addReservation({
                 ...formData,
-                createdAt: new Date().toISOString(), // Send ISO timestamp
+                createdAt: Timestamp.fromDate(new Date()),
             });
 
             alert(
